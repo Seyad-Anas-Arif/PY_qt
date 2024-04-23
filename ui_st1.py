@@ -20,7 +20,7 @@ class Ui_Widget(object):
         self.label.setMinimumSize(QtCore.QSize(241, 0))
         self.label.setMaximumSize(QtCore.QSize(241, 251))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../../../Downloads/download.jpeg"))
+        self.label.setPixmap(QtGui.QPixmap("images/download.jpeg"))
         self.label.setScaledContents(False)
         self.label.setObjectName("label")
         self.driveon_pb = QtWidgets.QPushButton(Widget)
