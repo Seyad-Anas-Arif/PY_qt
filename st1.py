@@ -1,22 +1,22 @@
 import sys
 import gpiod
 from gpiod.line import Direction, Value
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from ui_st1 import Ui_MainWindow  # Import the generated UI code
+from PyQt5.QtWidgets import QApplication, QWidget
+from ui_form import Ui_Widget  # Import the generated UI code from your UI file
 
 LINE = 2
 
-class LEDControlApp(QMainWindow):
+class LEDControlApp(QWidget):
     def __init__(self):
         super().__init__()
 
         # Set up the UI
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_Widget()
         self.ui.setupUi(self)
 
         # Connect button signals to slots
-        self.ui.button_on.clicked.connect(self.turn_on_led)
-        self.ui.button_off.clicked.connect(self.turn_off_led)
+        self.ui.start_pb.clicked.connect(self.turn_on_led)
+        self.ui.stop_pb.clicked.connect(self.turn_off_led)
 
         # Initialize GPIO
         self.gpio_request = gpiod.request_lines(
@@ -46,4 +46,3 @@ if __name__ == "__main__":
     window = LEDControlApp()
     window.show()
     sys.exit(app.exec_())
-
