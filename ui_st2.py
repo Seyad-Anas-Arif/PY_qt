@@ -221,7 +221,7 @@ class Ui_Widget(object):
         self.label = QtWidgets.QLabel(Widget)
         self.label.setGeometry(QtCore.QRect(40, 70, 111, 101))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../../../Downloads/Images/download.jpeg"))
+        self.label.setPixmap(QtGui.QPixmap("Images/download.jpeg"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
 
