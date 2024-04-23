@@ -29,7 +29,10 @@ class LEDControlApp(QWidget):
             },
         )
 
-     def resizeWidget(self):
+     # Resize the widget based on the display size
+        self.resizeWidget()
+
+    def resizeWidget(self):
         # Get the size of the screen
         screen = QApplication.primaryScreen()
         size = screen.size()
