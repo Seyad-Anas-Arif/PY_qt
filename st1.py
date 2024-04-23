@@ -29,6 +29,14 @@ class LEDControlApp(QWidget):
             },
         )
 
+     def resizeWidget(self):
+        # Get the size of the screen
+        screen = QApplication.primaryScreen()
+        size = screen.size()
+
+        # Adjust the widget size based on the screen size
+        self.resize(size.width() * 0.8, size.height() * 0.8)  # Adjust the scaling factor as needed
+
     def turn_on_led(self):
         if self.gpio_request:
             self.gpio_request.set_value(LINE, Value.ACTIVE)
