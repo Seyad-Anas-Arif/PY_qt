@@ -2,7 +2,7 @@ import sys
 import gpiod
 from gpiod.line import Direction, Value
 from PyQt5.QtWidgets import QApplication, QWidget
-from ui_st1 import Ui_Widget  # Import the generated UI code from your UI file
+from ui_st2 import Ui_Widget  # Import the generated UI code from your UI file
 
 LINE = 2
 
