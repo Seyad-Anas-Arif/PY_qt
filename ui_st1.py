@@ -15,6 +15,11 @@ class Ui_Widget(object):
     def setupUi(self, Widget):
         Widget.setObjectName("Widget")
         Widget.resize(1241, 823)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Widget.sizePolicy().hasHeightForWidth())
+        Widget.setSizePolicy(sizePolicy)
         self.label = QtWidgets.QLabel(Widget)
         self.label.setGeometry(QtCore.QRect(60, 60, 241, 251))
         self.label.setMinimumSize(QtCore.QSize(241, 0))
