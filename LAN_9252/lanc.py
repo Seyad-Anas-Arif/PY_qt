@@ -4,8 +4,8 @@ from lanh2 import *
 #import array 
 
 # Constants
-LAN9252_CS_PIN = 25  # Replace with the actual GPIO pin number for LAN9252 CS
-SPI_BUS = 0          # SPI bus number
+#LAN9252_CS_PIN = 25  # Replace with the actual GPIO pin number for LAN9252 CS
+SPI_BUS = 2          # SPI bus number
 SPI_DEVICE = 0       # SPI device number
 SPI_Mode = 0b00
 
