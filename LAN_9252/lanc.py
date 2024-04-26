@@ -219,8 +219,8 @@ def etc_scan():
 
     if WatchDog:                                              # return the status of the State Machine and of the watchdog
         Status |= 0x80
-
-    return Status
+    	return Status
+	    
     # Close SPI connection
-	spi.close()
+   spi.close()
 
