@@ -213,9 +213,9 @@ def etc_scan():
             Etc_Buffer_Out.LANLong[i] = 0
     else:
        # print("Read fifo")
-Etc_Read_Fifo()                                       # otherwise transfer process data from the EtherCAT core to the output buffer
+       Etc_Read_Fifo()                                       # otherwise transfer process data from the EtherCAT core to the output buffer
    # print("Write fifo")
-    Etc_Write_Fifo()                                          # transfer process data from the input buffer to the EtherCAT core
+       Etc_Write_Fifo()                                          # transfer process data from the input buffer to the EtherCAT core
 
     if WatchDog:                                              # return the status of the State Machine and of the watchdog
         Status |= 0x80
