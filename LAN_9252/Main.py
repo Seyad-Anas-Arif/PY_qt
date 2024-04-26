@@ -28,7 +28,7 @@ class Widget(QWidget):
         super().__init__(parent)
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
-        self.ETC_Startup()
+        self.etc_Startup()
 
         self.stat_pb.clicked.connect(self.turn_off_led)
         self.stop_pb.clicked.connect(self.turn_on_led)
@@ -51,11 +51,11 @@ class Widget(QWidget):
         if self.gpio_request:
             self.gpio_request.set_value(LINE, Value.INACTIVE)
 
-    def ETC_Startup(self):
+    def etc_Startup(self):
         global etc_init_ok, chip_id, etc_command, etc_command_value, etc_status_reg, received_setpoint, received_command
 
         # Read chip ID and initialize EtherCAT
-        chip_id = Etc_Read_Reg(ID_REV, 4)
+        chip_id = etc_read_reg(ID_REV, 4)
         etc_init_ok = etc_init()
 
         # EtherCAT Communication
