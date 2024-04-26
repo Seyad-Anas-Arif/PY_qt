@@ -1,10 +1,8 @@
 import spidev
 import time 
 from lanh2 import *
-#import array 
 
 # Constants
-#LAN9252_CS_PIN = 25  # Replace with the actual GPIO pin number for LAN9252 CS
 SPI_BUS = 2          # SPI bus number
 SPI_DEVICE = 0       # SPI device number
 SPI_Mode = 0b00
@@ -13,15 +11,7 @@ SPI_Mode = 0b00
 spi = spidev.SpiDev()
 spi.open(SPI_BUS, SPI_DEVICE)
 spi.max_speed_hz = 1000000  # Set SPI clock speed to 1MHz
-spi.mode = SPI_Mode                # Set SPI mode to 0 (CPOL=0, CPHA=0)
-
-# Function to set LAN9252 CS pin
-# def CS_SET():
-#   spi.xfer([LAN9252_CS_PIN, 0])
-
-# Function to reset LAN9252 CS pin
-#def CS_RESET():
-#    spi.xfer([LAN9252_CS_PIN, 1])
+spi.mode = SPI_Mode        # Set SPI mode to 0 (CPOL=0, CPHA=0)
 
 # Function to read from a directly addressable register
 def etc_read_reg(address, length):
@@ -40,9 +30,7 @@ def etc_read_reg(address, length):
         xfrbuf[i + 3] = DUMMY_BYTE  # fill dummy bytes
 
     # Send SPI transfer buffer
-   # CS_SET()
     spi.xfer2(xfrbuf)
-   # CS_RESET()
 
     # Extract the result from the received data
     result.LANLong = 0
@@ -69,9 +57,8 @@ def Etc_Write_Reg(address, DataOut):
         xfrbuf[i + 3] = Data.LANByte[i]  # data to be written (LSB first)
 
     # Send SPI transfer buffer
-    #CS_SET()
     spi.xfer2(xfrbuf)
-    #CS_RESET()
+
 # Function to read an indirectly addressable register
 def Etc_Read_Reg_Wait(address, length):
     TempLong = ULONG()
@@ -126,7 +113,7 @@ def Etc_Read_Fifo():
     TempLong.LANLong = 0
     while True:
         TempLong.LANLong = Etc_Read_Reg(ECAT_PRAM_RD_CMD, 4)  # Wait for data to be transferred from the output process ram to the read fifo
-    if (TempLong.LANByte[0] & PRAM_READ_AVAIL) and (TempLong.LANByte[1] == 8):
+        if (TempLong.LANByte[0] & PRAM_READ_AVAIL) and (TempLong.LANByte[1] == 8):
             break 
 
     xfrbuf[0] = COMM_SPI_READ        # SPI read command
@@ -135,9 +122,7 @@ def Etc_Read_Fifo():
     for i in range(32):               # 32 bytes dummy data
         xfrbuf[i + 3] = DUMMY_BYTE
 
-   # CS_SET()                          # Send 35 bytes and get back into the same buffer
     xfrbuf = spi.xfer(xfrbuf)
-   # CS_RESET()
 
     for i in range(32):               # 32 bytes read data to usable buffer
         Etc_Buffer_Out.LANByte[i] = xfrbuf[i + 3]
@@ -161,10 +146,7 @@ def Etc_Write_Fifo():
     for i in range(32):              # 32 bytes write loop
         xfrbuf[i + 3] = Etc_Buffer_In.LANByte[i]
 
-   # CS_SET()                         # Send 35 bytes and get back into the same buffer
     xfrbuf = spi.xfer(xfrbuf)
-   # CS_RESET()
-
 
 # Function to initialize / check the etc interface on SPI, return true if initialization is ok
 def etc_init():
@@ -175,15 +157,12 @@ def etc_init():
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)             # read test register
 
     if TempLong.LANLong != 0x87654321:                      # if the test register is not ok
-       # Bad response received from Etc Test command, data received
         return False
 
     TempLong.LANLong = Etc_Read_Reg(HW_CFG, 4)              # check also the READY flag
     if (TempLong.LANLong & READY) == 0:
-       # Ready not received from Etc HW Cfg, data received 
         return False
 
-   # Etc Test Command succeeded
     return True
 
 # Function for one scan of etc
@@ -197,7 +176,6 @@ def etc_scan():
         WatchDog = False
     else:
         WatchDog = True
-        #print("Etc Watchdog active")
 
     TempLong.LANLong = Etc_Read_Reg_Wait(AL_STATUS_REG_0, 1)  # read the EtherCAT State Machine status
     Status = TempLong.LANByte[0] & 0x0F
@@ -205,22 +183,17 @@ def etc_scan():
         Operational = True
     else:
         Operational = False
-      #  print("Etc not operational")
 
-    # Process data transfer
     if WatchDog or not Operational:                           # if watchdog is active or we are not in operational state, reset the output buffer
         for i in range(8):
             Etc_Buffer_Out.LANLong[i] = 0
     else:
-       # print("Read fifo")
-       Etc_Read_Fifo()                                       # otherwise transfer process data from the EtherCAT core to the output buffer
-   # print("Write fifo")
-       Etc_Write_Fifo()                                          # transfer process data from the input buffer to the EtherCAT core
+        Etc_Read_Fifo()                                       # otherwise transfer process data from the EtherCAT core to the output buffer
+        Etc_Write_Fifo()                                      # transfer process data from the input buffer to the EtherCAT core
 
     if WatchDog:                                              # return the status of the State Machine and of the watchdog
         Status |= 0x80
-    	return Status
-	    
-    # Close SPI connection
-   spi.close()
+    return Status
 
+# Close SPI connection
+spi.close()
