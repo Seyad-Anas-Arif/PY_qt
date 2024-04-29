@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt
 import gpiod  # You need to import gpiod
 from gpiod.line import Direction, Value  # Import required classes from gpiod module
 from lanc import * # Import functions from lanc module
+from lanh2 import *
 from ui_st2 import Ui_Widget
 
 # Define LINE and other variables
@@ -28,7 +29,7 @@ class Widget(QWidget):
         super().__init__(parent)
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
-        self.etc_Startup()
+        self.etc_Startup(self)
 
         self.stat_pb.clicked.connect(self.turn_off_led)
         self.stop_pb.clicked.connect(self.turn_on_led)
