@@ -9,10 +9,13 @@ SPI_Mode = 0b00
 
 # Create SPI object
 spi = spidev.SpiDev()
-spi.open(SPI_BUS, SPI_DEVICE)
-spi.max_speed_hz = 1000000  # Set SPI clock speed to 1MHz
-spi.mode = SPI_Mode        # Set SPI mode to 0 (CPOL=0, CPHA=0)
-
+try:
+    spi.open(SPI_BUS, SPI_DEVICE)
+    spi.max_speed_hz = 1000000  # Set SPI clock speed to 1MHz
+    spi.mode = SPI_Mode        # Set SPI mode to 0 (CPOL=0, CPHA=0)
+except IOError as e:
+    print("Error opening SPI device:", e)
+    exit(1)  # Exit the program if SPI device cannot be opened
 # Function to read from a directly addressable register
 def etc_read_reg(address, length):
     result = ULONG()
@@ -30,8 +33,12 @@ def etc_read_reg(address, length):
         xfrbuf[i + 3] = DUMMY_BYTE  # fill dummy bytes
 
     # Send SPI transfer buffer
-    spi.xfer2(xfrbuf)
-
+    try:
+        # Send SPI transfer buffer
+        spi.xfer2(xfrbuf)
+    except IOError as e:
+        print("Error during SPI communication:", e)
+        return None  # Return None if SPI communication fails
     # Extract the result from the received data
     result.LANLong = 0
     for i in range(length):
