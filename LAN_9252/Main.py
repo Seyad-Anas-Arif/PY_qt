@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtCore import Qt
 import gpiod  # You need to import gpiod
 from gpiod.line import Direction, Value  # Import required classes from gpiod module
-from lanc import * # Import functions from lanc module
+import lanc as LAN1# Import functions from lanc module
 from lanh2 import *
 from ui_st2 import Ui_Widget
 
@@ -57,14 +57,14 @@ class Widget(QWidget):
 
         # Read chip ID and initialize EtherCAT
         chip_id = etc_read_reg(ID_REV, 4)
-        etc_init_ok = etc_init()
+        etc_init_ok = LAN1.etc_init()
 
         # EtherCAT Communication
         if etc_init_ok:
             print("Etercat Initialized")
-            etc_scan()
+            LAN1.etc_scan()
         else:
-            etc_init_ok = etc_init()
+            etc_init_ok = LAN1.etc_init()
             print("Issue in ethercat init")
 
         # EtherCAT Command Receive
