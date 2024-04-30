@@ -29,7 +29,7 @@ class Widget(QWidget):
         super().__init__(parent)
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
-        self.etc_Startup(self)
+        self.etc_Startup()
 
         self.stat_pb.clicked.connect(self.turn_off_led)
         self.stop_pb.clicked.connect(self.turn_on_led)
