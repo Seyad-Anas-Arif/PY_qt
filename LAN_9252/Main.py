@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtCore import Qt
 import gpiod  # You need to import gpiod
 from gpiod.line import Direction, Value  # Import required classes from gpiod module
-import lanc as LAN1# Import functions from lanc module
+from lanc import Etc_Init,Etc_Scan,Etc_Read_reg# Import functions from lanc module
 from lanh2 import *
 from ui_st2 import Ui_Widget
 
@@ -15,19 +15,6 @@ Etc_Buffer_In  = PROCBUFFER()
 # Define LINE and other variables
 LINE = 2
 etc_init_ok = False
-chip_id = 0
-etc_command = 0
-etc_command_value = 0.0
-etc_status_reg = 0
-received_setpoint = 0.0
-received_command = 0
-
-ETC_HOME_STATUS = 0
-ETC_POSITIVE_LIMIT = 1
-ETC_NEGATIVE_LIMIT = 2
-ETC_DRIVE_FAULT = 3
-ETC_PCAP_ERROR_BIT = 4
-
 class Widget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -57,18 +44,17 @@ class Widget(QWidget):
             self.gpio_request.set_value(LINE, Value.INACTIVE)
 
     def etc_Startup(self):
-        global etc_init_ok, chip_id, etc_command, etc_command_value, etc_status_reg, received_setpoint, received_command
 
         # Read chip ID and initialize EtherCAT
-        chip_id =LAN1.Etc_Read_Reg(ID_REV, 4)
-        etc_init_ok = LAN1.etc_init()
+        chip_id =Etc_Read_Reg(ID_REV, 4)
+        etc_init_ok = Etc_Init()
 
         # EtherCAT Communication
         if etc_init_ok:
             print("Etercat Initialized")
-            LAN1.etc_scan()
+            LAN1.Etc_Scan()
         else:
-            etc_init_ok = LAN1.etc_init()
+            etc_init_ok = Etc_Init()
             print("Issue in ethercat init")
 
         # EtherCAT Command Receive
