@@ -8,6 +8,10 @@ import lanc as LAN1# Import functions from lanc module
 from lanh2 import *
 from ui_st2 import Ui_Widget
 
+#rename the union
+Etc_Buffer_Out = PROCBUFFER()
+Etc_Buffer_In  = PROCBUFFER()
+
 # Define LINE and other variables
 LINE = 2
 etc_init_ok = False
@@ -31,8 +35,8 @@ class Widget(QWidget):
         self.ui.setupUi(self)
         self.etc_Startup()
 
-        self.stat_pb.clicked.connect(self.turn_off_led)
-        self.stop_pb.clicked.connect(self.turn_on_led)
+        self.ui.start_pb.clicked.connect(self.turn_off_led)
+        self.ui.stop_pb.clicked.connect(self.turn_on_led)
 
         self.gpio_request = gpiod.request_lines(
             "/dev/gpiochip0",
@@ -56,7 +60,7 @@ class Widget(QWidget):
         global etc_init_ok, chip_id, etc_command, etc_command_value, etc_status_reg, received_setpoint, received_command
 
         # Read chip ID and initialize EtherCAT
-        chip_id = etc_read_reg(ID_REV, 4)
+        chip_id =LAN1.Etc_Read_Reg(ID_REV, 4)
         etc_init_ok = LAN1.etc_init()
 
         # EtherCAT Communication
