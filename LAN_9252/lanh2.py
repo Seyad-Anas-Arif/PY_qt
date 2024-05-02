@@ -157,4 +157,5 @@ class ULONG(ctypes.Union):
 
 class PROCBUFFER(ctypes.Union):
     _fields_ = [("LANByte", ctypes.c_uint8 * 32),
-                ("LANLong", ctypes.c_uint32 * 8)]
+                ("LANFloat", ctypes.c_float * 8),
+	            ("LANLong", ctypes.c_uint32 * 8)]
