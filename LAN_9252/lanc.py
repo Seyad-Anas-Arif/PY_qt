@@ -1,6 +1,9 @@
 import spidev
 import time 
 from lanh2 import *
+# Global variable 
+Etc_Buffer_Out = PROCBUFFER
+Etc_Buffer_In  = PROCBUFFER
 
 # Constants
 SPI_BUS = 2          # SPI bus number
