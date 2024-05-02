@@ -52,7 +52,7 @@ class Widget(QWidget):
         # EtherCAT Communication
         if etc_init_ok:
             print("Etercat Initialized")
-            LAN1.Etc_Scan()
+            Etc_Scan()
         else:
             etc_init_ok = Etc_Init()
             print("Issue in ethercat init")
