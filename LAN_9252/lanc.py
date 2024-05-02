@@ -162,24 +162,27 @@ def Etc_Write_Fifo():
     xfrbuf = spi.xfer(xfrbuf)
 
 # Function to initialize / check the etc interface on SPI, return true if initialization is ok
-def etc_init():
+def Etc_Init():
     TempLong = ULONG()
-
+    printf("Enter int to etc init")
     Etc_Write_Reg(RESET_CTL, (DIGITAL_RST & ETHERCAT_RST))  # LAN9252 reset
     time.sleep(0.1)
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)             # read test register
 
     if TempLong.LANLong != 0x87654321:                      # if the test register is not ok
+        print("chip id not matched")
         return False
 
     TempLong.LANLong = Etc_Read_Reg(HW_CFG, 4)              # check also the READY flag
     if (TempLong.LANLong & READY) == 0:
+        print("ready flag on red")
         return False
-
+    print("succes fully initialized")
     return True
 
 # Function for one scan of etc
-def etc_scan():
+def Etc_Scan():
+    print("scan started")
     WatchDog = False
     Operational = False
     TempLong = ULONG()
@@ -207,6 +210,6 @@ def etc_scan():
     if WatchDog:                                              # return the status of the State Machine and of the watchdog
         Status |= 0x80
     return Status
-
+print("Exited from scan")
 # Close SPI connection
 spi.close()
