@@ -38,16 +38,9 @@ def Etc_Read_Reg(address, length):
         print(xfrbuf)
 
     # Send SPI transfer buffer
-    try:
-        # Send SPI transfer buffer
-        
-        spi.xfer2(xfrbuf)
-        print("\n After read:")
-        for i in range (7):
-            pritnt(xfrbuf)
-    except IOError as e:
-        print("Error during SPI communication:", e)
-        return 0  # Return None if SPI communication fails
+        xfrbuf=spi.xfer2(xfrbuf)
+        print("\n After read:",xfrbuf)
+   # Return None if SPI communication fails
     # Extract the result from the received data
     result.LANLong = 0
     for i in range(length):
@@ -71,13 +64,10 @@ def Etc_Write_Reg(address, DataOut):
     xfrbuf[2] = Addr.LANByte[0]  # address of the register (LSB)
     for i in range(4):
         xfrbuf[i + 3] = Data.LANByte[i]  # data to be written (LSB first)
-
-    try:
         # Send SPI transfer buffer
-        spi.xfer2(xfrbuf)
-    except IOError as e:
-        print("Error during SPI communication:", e)
-        return None  # Return None if SPI communication fails
+        xfrbuf = spi.xfer2(xfrbuf)
+        print("write reg",xfrbuf)
+   
 # Function to read an indirectly addressable register
 def Etc_Read_Reg_Wait(address, length):
     TempLong = ULONG()
