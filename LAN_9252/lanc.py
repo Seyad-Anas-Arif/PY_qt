@@ -32,13 +32,19 @@ def Etc_Read_Reg(address, length):
     xfrbuf[0] = COMM_SPI_READ  # SPI read command
     xfrbuf[1] = addr.LANByte[1]  # address of the register (MSB)
     xfrbuf[2] = addr.LANByte[0]  # address of the register (LSB)
+    print("\n Before chages ")
     for i in range(length):
         xfrbuf[i + 3] = DUMMY_BYTE  # fill dummy bytes
+        print(xfrbuf)
 
     # Send SPI transfer buffer
     try:
         # Send SPI transfer buffer
+        
         spi.xfer2(xfrbuf)
+        print("\n After read:")
+        for 1 in range (7):
+            pritnt(xfrbuf)
     except IOError as e:
         print("Error during SPI communication:", e)
         return 0  # Return None if SPI communication fails
