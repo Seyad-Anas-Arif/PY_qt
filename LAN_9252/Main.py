@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtCore import Qt
 import gpiod  # You need to import gpiod
 from gpiod.line import Direction, Value  # Import required classes from gpiod module
-from lanc import Etc_Init,Etc_Scan,Etc_Read_reg# Import functions from lanc module
+from lanc import Etc_Init,Etc_Scan,Etc_Read_Reg# Import functions from lanc module
 from lanh2 import *
 from ui_st2 import Ui_Widget
 
