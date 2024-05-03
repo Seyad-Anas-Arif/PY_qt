@@ -43,8 +43,9 @@ def Etc_Read_Reg(address, length):
         
         spi.xfer2(xfrbuf)
         print("\n After read:")
-        for 1 in range (7):
+        for i in range (7):
             pritnt(xfrbuf)
+            i++
     except IOError as e:
         print("Error during SPI communication:", e)
         return 0  # Return None if SPI communication fails
