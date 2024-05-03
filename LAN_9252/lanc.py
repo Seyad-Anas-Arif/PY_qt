@@ -170,7 +170,7 @@ def Etc_Write_Fifo():
 # Function to initialize / check the etc interface on SPI, return true if initialization is ok
 def Etc_Init():
     TempLong = ULONG()
-    printf("Enter int to etc init")
+    print("Enter int to etc init")
     Etc_Write_Reg(RESET_CTL, (DIGITAL_RST & ETHERCAT_RST))  # LAN9252 reset
     time.sleep(0.1)
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)             # read test register
