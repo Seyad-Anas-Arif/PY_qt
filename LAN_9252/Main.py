@@ -47,6 +47,7 @@ class Widget(QWidget):
 
         # Read chip ID and initialize EtherCAT
         chip_id =Etc_Read_Reg(ID_REV, 4)
+        print("chip id is :",chip_id)
         etc_init_ok = Etc_Init()
 
         # EtherCAT Communication
