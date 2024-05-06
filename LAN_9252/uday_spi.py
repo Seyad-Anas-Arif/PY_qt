@@ -1,3 +1,4 @@
+
 import spidev
 import time
 import ctypes
@@ -185,7 +186,7 @@ Etc_Buffer_In = PROCBUFFER()
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Assuming SPI bus 0, device 0
 spi.max_speed_hz = 48000000  # Adjust as needed
-spi.mode = 3
+spi.mode = 0b00
 
 Etc_Buffer_Out.LANByte[:] = [0] * 32     #  etc routines
 Etc_Buffer_In.LANByte[:] = [0] * 32      # etc routines
