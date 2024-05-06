@@ -39,8 +39,8 @@ def Etc_Read_Reg(address, length):
     print(xfrbuf)
 
     # Send SPI transfer buffer
-    out = spi.xfer2(xfrbuf)
-    print("\n After read:",out)
+    spi.xfer2(xfrbuf)
+    print("\n After read:",xfrbuf)
    # Return None if SPI communication fails
     # Extract the result from the received data
     result.LANLong = 0
