@@ -21,6 +21,7 @@ spi.mode = SPI_Mode        # Set SPI mode to 0 (CPOL=0, CPHA=0)
     #exit(1)  # Exit the program if SPI device cannot be opened
 # Function to read from a directly addressable register
 def Etc_Read_Reg(address, length):
+    print("Inside Read")
     result = ULONG()
     addr = UWORD()
     xfrbuf = [0] * 7  # buffer for SPI transfer
@@ -39,9 +40,10 @@ def Etc_Read_Reg(address, length):
     print(xfrbuf)
 
     # Send SPI transfer buffer
-    spi.xfer2(xfrbuf)
-    print("\n After read:",xfrbuf)
-   # Return None if SPI communication fails
+    Read_out = spi.xfer2(xfrbuf)
+    print("\n After read:",Read_out)
+    xfrbuf=Read_out[:]
+    # Return None if SPI communication fails
     # Extract the result from the received data
     result.LANLong = 0
     for i in range(length):
@@ -51,6 +53,7 @@ def Etc_Read_Reg(address, length):
 
 # Function to write to a directly addressable register
 def Etc_Write_Reg(address, DataOut):
+    Print("Inside write")
     Data = ULONG()
     Addr = UWORD()
     xfrbuf = [0] * 7  # buffer for SPI transfer
@@ -66,8 +69,9 @@ def Etc_Write_Reg(address, DataOut):
     for i in range(4):
         xfrbuf[i + 3] = Data.LANByte[i]  # data to be written (LSB first)
         # Send SPI transfer buffer
-    spi.xfer2(xfrbuf)
-    print("write reg",result2)
+    Write_out = spi.xfer2(xfrbuf)
+    print("write reg",Write_out)
+    xfrbuf = Write_out[:]
    
 # Function to read an indirectly addressable register
 def Etc_Read_Reg_Wait(address, length):
