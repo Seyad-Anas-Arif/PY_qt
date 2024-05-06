@@ -12,13 +12,13 @@ SPI_Mode = 0b00
 
 # Create SPI object
 spi = spidev.SpiDev()
-try:
-    spi.open(SPI_BUS, SPI_DEVICE)
-    spi.max_speed_hz = 1000000  # Set SPI clock speed to 1MHz
-    spi.mode = SPI_Mode        # Set SPI mode to 0 (CPOL=0, CPHA=0)
-except IOError as e:
-    print("Error opening SPI device:", e)
-    exit(1)  # Exit the program if SPI device cannot be opened
+#try:
+spi.open(SPI_BUS, SPI_DEVICE)
+spi.max_speed_hz = 48000000  # Set SPI clock speed to 48MHz
+spi.mode = SPI_Mode        # Set SPI mode to 0 (CPOL=0, CPHA=0)
+#except IOError as e:
+   # print("Error opening SPI device:", e)
+    #exit(1)  # Exit the program if SPI device cannot be opened
 # Function to read from a directly addressable register
 def Etc_Read_Reg(address, length):
     result = ULONG()
