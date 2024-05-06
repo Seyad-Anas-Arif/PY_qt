@@ -35,11 +35,12 @@ def Etc_Read_Reg(address, length):
     print("\n Before chages ")
     for i in range(length):
         xfrbuf[i + 3] = DUMMY_BYTE  # fill dummy bytes
-        print(xfrbuf)
+        
+     print(xfrbuf)
 
     # Send SPI transfer buffer
-        xfrbuf = spi.xfer(xfrbuf)
-        print("\n After read:",xfrbuf)
+    xfrbuf = spi.xfer(xfrbuf)
+     print("\n After read:",xfrbuf)
    # Return None if SPI communication fails
     # Extract the result from the received data
     result.LANLong = 0
@@ -65,8 +66,8 @@ def Etc_Write_Reg(address, DataOut):
     for i in range(4):
         xfrbuf[i + 3] = Data.LANByte[i]  # data to be written (LSB first)
         # Send SPI transfer buffer
-        xfrbuf = spi.xfer(xfrbuf)
-        print("write reg",xfrbuf)
+     xfrbuf = spi.xfer(xfrbuf)
+     print("write reg",xfrbuf)
    
 # Function to read an indirectly addressable register
 def Etc_Read_Reg_Wait(address, length):
@@ -206,6 +207,6 @@ def Etc_Scan():
     if WatchDog:                                              # return the status of the State Machine and of the watchdog
         Status |= 0x80
     return Status
-print("Exited from scan")
+    print("Exited from scan")
 # Close SPI connection
 spi.close()
