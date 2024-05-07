@@ -31,15 +31,15 @@ def Etc_Read_Reg(address, length):
     xfrbuf[1] = Addr.LANByte[1]
     xfrbuf[2] = Addr.LANByte[0]
 
-    response = spi.xfer2(list(xfrbuf))  # Use xfer2 for SPI transfer
+    response = spi.xfer2(xfrbuf)  # Use xfer2 for SPI transfer
 
     for i in range(length):
         Result.LANByte[i] = response[i + 3]
     return Result.LANLong
 
 def main():
-    chip_id = Etc_Read_Reg(ID_REV, 4)
-    print("chip id is ", hex(chip_id))
+    c_uint32.chip_id = Etc_Read_Reg(ID_REV, 4)
+    print("chip id is ", chip_id)
     time.sleep(1)
 
 if __name__ == "__main__":
