@@ -186,7 +186,7 @@ Etc_Buffer_In = PROCBUFFER()
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Assuming SPI bus 0, device 0
 spi.max_speed_hz = 1000000  # Adjust as needed
-spi.mode = 0b00
+spi.mode = 0b10
 spi.lsbfirst = False
 
 Etc_Buffer_Out.LANByte[:] = [0] * 32     #  etc routines
