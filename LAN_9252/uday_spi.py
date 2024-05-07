@@ -186,7 +186,7 @@ Etc_Buffer_In = PROCBUFFER()
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Assuming SPI bus 0, device 0
 spi.max_speed_hz = 48000000  # Adjust as needed
-spi.mode = 0b10
+spi.mode = 0b11
 
 Etc_Buffer_Out.LANByte[:] = [0] * 32     #  etc routines
 Etc_Buffer_In.LANByte[:] = [0] * 32      # etc routines
@@ -358,7 +358,7 @@ def Etc_Write_Fifo():
 
 def etc_init():
     TempLong = ULONG()
-
+    print("\n \n ETC started")
     Etc_Write_Reg(RESET_CTL, (DIGITAL_RST & ETHERCAT_RST)) # Need to check "AND" Operator
     time.sleep(0.3)
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
@@ -385,7 +385,6 @@ def etc_scan():
     Operational = False
     TempLong = ULONG()
     Status = 0
-    print("\n \n ETC started")
     TempLong.LANLong = Etc_Read_Reg_Wait(WDOG_STATUS, 1) # read watchdog status
 
     if ((TempLong.LANByte[0] & 0x01) == 0x01):
