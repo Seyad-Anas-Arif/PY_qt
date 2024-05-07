@@ -39,7 +39,7 @@ def Etc_Read_Reg(address, length):
 
 def main():
     c_uint32.chip_id = Etc_Read_Reg(ID_REV, 4)
-    print("chip id is ", chip_id)
+    print("chip id is ", c_uint32.chip_id)
     time.sleep(1)
 
 if __name__ == "__main__":
