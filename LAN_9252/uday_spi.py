@@ -186,7 +186,7 @@ Etc_Buffer_In = PROCBUFFER()
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Assuming SPI bus 0, device 0
 spi.max_speed_hz = 48000000  # Adjust as needed
-spi.mode = 0b00
+spi.mode = 0b01
 
 Etc_Buffer_Out.LANByte[:] = [0] * 32     #  etc routines
 Etc_Buffer_In.LANByte[:] = [0] * 32      # etc routines
@@ -199,7 +199,7 @@ def Etc_Read_Reg(address, length):
     print("\n inside Read Reagister")
     Result = ULONG()  # Initialize Result as ULONG instance
     Addr = UWORD()    # Initialize Addr as UWORD instance and set address
-    xfrbuf = (ctypes.c_uint8 * 7)()  # Create buffer for SPI transfer
+    xfrbuf = [0] * 7   # Create buffer for SPI transfer
 
     Addr.LANWord = address
 
@@ -227,7 +227,7 @@ def Etc_Write_Reg(address, DataOut):
     print("\n inside write Register")
     Data = ULONG()
     Addr = UWORD()
-    xfrbuf = (ctypes.c_uint8 * 7)()  # Create buffer for SPI transfer
+    xfrbuf = [0] * 7  # Create buffer for SPI transfer
 
     Addr.LANWord = address
     Data.LANLong = DataOut
@@ -243,7 +243,7 @@ def Etc_Write_Reg(address, DataOut):
     
     print("\n xfrbuf after filling: ",xfrbuf)
 
-    response = spi.xfer(xfrbuf)
+    response = spi.xfer2(xfrbuf)
     print("response from Write reg",response)
     
     # Transmit function
