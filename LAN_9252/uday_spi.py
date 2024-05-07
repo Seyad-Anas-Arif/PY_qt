@@ -369,7 +369,7 @@ def etc_init():
 
     if((TempLong.LANLong & READY) == 0 ):
         print("Ready not received from Etc HW Cfg, data received =", TempLong.LANLong)
-        #return False
+        return False
 
     print("Etc Test Command succeeded\n")
     return True
