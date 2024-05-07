@@ -210,19 +210,15 @@ def Etc_Read_Reg(address, length):
    # print()
     print("Entered Read_reg \n")
    # print()
-    print("xfrbuf before filling: ", end="")
-    for i in range(3):
-        print("\n {:02X} ".format(xfrbuf[i]), end="")          
+    print("xfrbuf before filling: ",xfrbuf)
 
     for i in range(length):
         xfrbuf[i + 3] = DUMMY_BYTE  # Fill dummy bytes after address bytes
-
-    print("\nxfrbuf after filling: ", end="")
-    for i in range(7):
-        print("\n {:02X} ".format(xfrbuf[i]), end="")
+    print("\nxfrbuf after filling: ", xfrbuf)
+   
 
     response = spi.xfer(xfrbuf)
-    
+    print("Response from read register",response)
     # response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
 
     for i in range(length):
@@ -245,17 +241,15 @@ def Etc_Write_Reg(address, DataOut):
     xfrbuf[1] = Addr.LANByte[1]    # address of the register
     xfrbuf[2] = Addr.LANByte[0]    # to read, MsByte first
 
-    print("xfrbuf before filling: ", end="")
-    for i in range(3):
-        print("{:02X} ".format(xfrbuf[i]), end="")
+    print("xfrbuf before Write filling: ", xfrbuf)
+
     for i in range(4):
         xfrbuf[i+3] = Data.LANByte[i]       # Fill data bytes, lsb
     
-    print("\nxfrbuf after filling: ", end="")
-    for i in range(7):
-        print("{:02X} ".format(xfrbuf[i]), end="")
+    print("\nxfrbuf after filling: ",xfrbuf)
 
     response = spi.xfer(xfrbuf)
+    print("response from Write reg",response)
     
     # Transmit function
     #response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
