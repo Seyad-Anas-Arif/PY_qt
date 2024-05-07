@@ -212,8 +212,7 @@ def Etc_Read_Reg(address, length):
     print("\n xfrbuf after filling: ", xfrbuf)
    
     spi.cshigh = False  
-    response = spi.xfer2(xfrbuf)
-    spi.cshigh = True  
+    response = spi.xfer2(xfrbuf) 
     print("Response from read register",response)
     # response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
 
@@ -244,8 +243,7 @@ def Etc_Write_Reg(address, DataOut):
     
     print("\n xfrbuf after filling: ",xfrbuf)
     spi.cshigh = False  
-    response = spi.xfer2(xfrbuf)
-    spi.cshigh = True  
+    response = spi.xfer2(xfrbuf) 
     print("response from Write reg",response)
     
     # Transmit function
@@ -361,7 +359,6 @@ def Etc_Write_Fifo():
 def etc_init():
     TempLong = ULONG()
     print("\n \n ETC started")
-    spi.cshigh = True
     Etc_Write_Reg(RESET_CTL, (DIGITAL_RST & ETHERCAT_RST)) # Need to check "AND" Operator
     time.sleep(0.3)
     TempLong.LANLong = Etc_Read_Reg(BYTE_TEST, 4)          # read test register
