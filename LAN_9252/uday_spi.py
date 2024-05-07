@@ -212,7 +212,7 @@ def Etc_Read_Reg(address, length):
     print("\n xfrbuf after filling: ", xfrbuf)
    
 
-    response = spi.xfer(xfrbuf)
+    response = spi.xfer2(xfrbuf)
     print("Response from read register",response)
     # response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
 
@@ -385,7 +385,7 @@ def etc_scan():
     Operational = False
     TempLong = ULONG()
     Status = 0
-
+    print("\n \n ETC started")
     TempLong.LANLong = Etc_Read_Reg_Wait(WDOG_STATUS, 1) # read watchdog status
 
     if ((TempLong.LANByte[0] & 0x01) == 0x01):
