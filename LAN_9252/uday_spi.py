@@ -207,14 +207,9 @@ def Etc_Read_Reg(address, length):
     xfrbuf[1] = Addr.LANByte[1]  # Address high byte
     xfrbuf[2] = Addr.LANByte[0]  # Address low byte
 
-   # print()
-    print("Entered Read_reg \n")
-   # print()
-    print("xfrbuf before filling: ",xfrbuf)
-
     for i in range(length):
         xfrbuf[i + 3] = DUMMY_BYTE  # Fill dummy bytes after address bytes
-    print("\nxfrbuf after filling: ", xfrbuf)
+    print("\n xfrbuf after filling: ", xfrbuf)
    
 
     response = spi.xfer(xfrbuf)
@@ -241,12 +236,12 @@ def Etc_Write_Reg(address, DataOut):
     xfrbuf[1] = Addr.LANByte[1]    # address of the register
     xfrbuf[2] = Addr.LANByte[0]    # to read, MsByte first
 
-    print("xfrbuf before Write filling: ", xfrbuf)
+   # print("xfrbuf before Write filling: ", xfrbuf)
 
     for i in range(4):
         xfrbuf[i+3] = Data.LANByte[i]       # Fill data bytes, lsb
     
-    print("\nxfrbuf after filling: ",xfrbuf)
+    print("\n xfrbuf after filling: ",xfrbuf)
 
     response = spi.xfer(xfrbuf)
     print("response from Write reg",response)
