@@ -186,7 +186,7 @@ Etc_Buffer_In = PROCBUFFER()
 spi = spidev.SpiDev()
 spi.open(2, 0)  # Assuming SPI bus 0, device 0
 spi.max_speed_hz = 48000000  # Adjust as needed
-spi.mode = 0b10
+spi.mode = 0b11
 spi.lsbfirst = False
 
 Etc_Buffer_Out.LANByte[:] = [0] * 32     #  etc routines
@@ -212,7 +212,7 @@ def Etc_Read_Reg(address, length):
         xfrbuf[i + 3] = DUMMY_BYTE  # Fill dummy bytes after address bytes
     print("\n xfrbuf after filling: ", xfrbuf)
   
-    response = spi.xfer2(xfrbuf) 
+    response = spi.xfer2([xfrbuf]) 
     print("Response from read register",response)
     # response = spi.xfer2(list(xfrbuf))  # Perform SPI transfer and receive response
 
@@ -241,7 +241,7 @@ def Etc_Write_Reg(address, DataOut):
     for i in range(4):
         xfrbuf[i+3] = Data.LANByte[i]       # Fill data bytes, lsb
     print("\n xfrbuf after filling: ",xfrbuf)
-    response = spi.xfer2(xfrbuf) 
+    response = spi.xfer2([xfrbuf]) 
     print("response from Write reg",response)
     
     # Transmit function
