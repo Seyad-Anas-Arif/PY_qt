@@ -204,7 +204,7 @@ def Etc_Read_Reg(address, length):
 
     Addr.LANWord = address
 
-    xfrbuf[0] = COMM_SPI_READ  # SPI read command
+    xfrbuf[0] = COMM_SPI_WRITE  # SPI read command
     xfrbuf[1] = Addr.LANByte[1]  # Address high byte
     xfrbuf[2] = Addr.LANByte[0]  # Address low byte
 
@@ -232,7 +232,7 @@ def Etc_Write_Reg(address, DataOut):
     Addr.LANWord = address
     Data.LANLong = DataOut
 
-    xfrbuf[0] = COMM_SPI_READ     # SPI write command
+    xfrbuf[0] = COMM_SPI_WRITE     # SPI write command
     xfrbuf[1] = Addr.LANByte[1]    # address of the register
     xfrbuf[2] = Addr.LANByte[0]    # to read, MsByte first
 
