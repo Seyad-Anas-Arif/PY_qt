@@ -1,4 +1,4 @@
-
+import time
 import spidev
 import adxl345.base
 
@@ -50,4 +50,6 @@ if __name__ == "__main__":
 
         # Print the acceleration values
         print("Acceleration - X: %.2f g, Y: %.2f g, Z: %.2f g" % (acceleration['x'], acceleration['y'], acceleration['z']))
+
+        time.sleep(1)
 
