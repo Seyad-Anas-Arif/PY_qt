@@ -52,8 +52,9 @@ def Etc_Read_Reg(address, length):
     return result.LANLong
 
 # Function to write to a directly addressable register
+# Function to write to a directly addressable register
 def Etc_Write_Reg(address, DataOut):
-    Print("Inside write")
+    print("Inside write")  # Fixed the typo here
     Data = ULONG()
     Addr = UWORD()
     xfrbuf = [0] * 7  # buffer for SPI transfer
@@ -68,11 +69,12 @@ def Etc_Write_Reg(address, DataOut):
     xfrbuf[2] = Addr.LANByte[0]  # address of the register (LSB)
     for i in range(4):
         xfrbuf[i + 3] = Data.LANByte[i]  # data to be written (LSB first)
-        # Send SPI transfer buffer
+
+    # Send SPI transfer buffer
     Write_out = spi.xfer2(xfrbuf)
-    print("write reg",Write_out)
+    print("write reg", Write_out)
     xfrbuf = Write_out[:]
-   
+
 # Function to read an indirectly addressable register
 def Etc_Read_Reg_Wait(address, length):
     TempLong = ULONG()
