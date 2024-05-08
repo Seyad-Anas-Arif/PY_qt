@@ -40,4 +40,13 @@ if __name__ == "__main__":
 
     # Print the device ID
     print("Device ID:", device_id)
+   # Optional: Set the range and resolution of the sensor
+    adxl.set_range(16)  # Set range to +/- 16g
+    adxl.set_data_rate(100)  # Set data rate to 100 Hz
+
+# Read acceleration values
+    acceleration = adxl.get_axes()
+
+# Print the acceleration values
+    print("Acceleration - X: %.2f g, Y: %.2f g, Z: %.2f g" % (acceleration['x'], acceleration['y'], acceleration['z']))
 
