@@ -44,9 +44,10 @@ if __name__ == "__main__":
     adxl345.set_range(16)  # Set range to +/- 16g
     adxl345.set_data_rate(100)  # Set data rate to 100 Hz
 
-# Read acceleration values
-    acceleration = adxl345.get_axes()
+    # Read acceleration values
+    while True:
+        acceleration = adxl345.get_axes()
 
-# Print the acceleration values
-    print("Acceleration - X: %.2f g, Y: %.2f g, Z: %.2f g" % (acceleration['x'], acceleration['y'], acceleration['z']))
+        # Print the acceleration values
+        print("Acceleration - X: %.2f g, Y: %.2f g, Z: %.2f g" % (acceleration['x'], acceleration['y'], acceleration['z']))
 
