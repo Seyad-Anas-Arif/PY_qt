@@ -1,9 +1,10 @@
 import spidev
 import time 
 from lanh2 import *
-# Global variable 
+
+# Global variables
 Etc_Buffer_Out = PROCBUFFER
-Etc_Buffer_In  = PROCBUFFER
+Etc_Buffer_In = PROCBUFFER
 
 # Constants
 SPI_BUS = 2          # SPI bus number
@@ -12,13 +13,12 @@ SPI_Mode = 0b00
 
 # Create SPI object
 spi = spidev.SpiDev()
-#try:
+
+# Open SPI connection
 spi.open(SPI_BUS, SPI_DEVICE)
 spi.max_speed_hz = 48000000  # Set SPI clock speed to 48MHz
 spi.mode = SPI_Mode        # Set SPI mode to 0 (CPOL=0, CPHA=0)
-#except IOError as e:
-   # print("Error opening SPI device:", e)
-    #exit(1)  # Exit the program if SPI device cannot be opened
+
 # Function to read from a directly addressable register
 def Etc_Read_Reg(address, length):
     print("Inside Read")
@@ -33,28 +33,26 @@ def Etc_Read_Reg(address, length):
     xfrbuf[0] = COMM_SPI_READ  # SPI read command
     xfrbuf[1] = addr.LANByte[1]  # address of the register (MSB)
     xfrbuf[2] = addr.LANByte[0]  # address of the register (LSB)
-    print("\n Before chages ")
+    
     for i in range(length):
         xfrbuf[i + 3] = DUMMY_BYTE  # fill dummy bytes
         
-    print(xfrbuf)
+    print("\n Before changes: ", xfrbuf)
 
-    # Send SPI transfer buffer
-    Read_out = spi.xfer2(xfrbuf)
-    print("\n After read:",Read_out)
-    xfrbuf=Read_out[:]
-    # Return None if SPI communication fails
+    # Send SPI transfer buffer and receive response
+    read_out = spi.xfer2(xfrbuf)
+    print("\n After read: ", read_out)
+    
     # Extract the result from the received data
     result.LANLong = 0
     for i in range(length):
-        result.LANByte[i] = xfrbuf[i + 3]  # read the requested number of bytes (LSB first)
+        result.LANByte[i] = read_out[i + 3]  # read the requested number of bytes (LSB first)
 
     return result.LANLong
 
 # Function to write to a directly addressable register
-# Function to write to a directly addressable register
 def Etc_Write_Reg(address, DataOut):
-    print("Inside write")  # Fixed the typo here
+    print("Inside write")
     Data = ULONG()
     Addr = UWORD()
     xfrbuf = [0] * 7  # buffer for SPI transfer
@@ -70,10 +68,12 @@ def Etc_Write_Reg(address, DataOut):
     for i in range(4):
         xfrbuf[i + 3] = Data.LANByte[i]  # data to be written (LSB first)
 
-    # Send SPI transfer buffer
-    Write_out = spi.xfer2(xfrbuf)
-    print("write reg", Write_out)
-    xfrbuf = Write_out[:]
+    # Send SPI transfer buffer and receive response
+    write_out = spi.xfer2(xfrbuf)
+    print("write reg: ", write_out)
+
+# Close SPI connection (if needed)
+# spi.close()
 
 # Function to read an indirectly addressable register
 def Etc_Read_Reg_Wait(address, length):
