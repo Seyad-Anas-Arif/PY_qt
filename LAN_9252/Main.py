@@ -20,10 +20,10 @@ class Widget(QWidget):
         super().__init__(parent)
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
-      #  self.etc_Startup()
+        self.etc_Startup()
 
         self.ui.start_pb.clicked.connect(self.turn_on_led)
-        self.ui.start_pb.clicked.connect(self.etc_Startup)
+        #self.ui.start_pb.clicked.connect(self.etc_Startup)
         self.ui.stop_pb.clicked.connect(self.turn_off_led)
 
         self.gpio_request = gpiod.request_lines(
