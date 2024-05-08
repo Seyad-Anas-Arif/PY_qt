@@ -40,7 +40,7 @@ def Etc_Read_Reg(address, length):
     print(xfrbuf)
 
     # Send SPI transfer buffer
-    Read_out = spi.xfer2(xfrbuf)
+    Read_out = spi.xfer(xfrbuf)
     print("\n After read:",Read_out)
     xfrbuf=Read_out[:]
     # Return None if SPI communication fails
@@ -69,7 +69,7 @@ def Etc_Write_Reg(address, DataOut):
     for i in range(4):
         xfrbuf[i + 3] = Data.LANByte[i]  # data to be written (LSB first)
         # Send SPI transfer buffer
-    Write_out = spi.xfer2(xfrbuf)
+    Write_out = spi.xfer(xfrbuf)
     print("write reg",Write_out)
     xfrbuf = Write_out[:]
    
