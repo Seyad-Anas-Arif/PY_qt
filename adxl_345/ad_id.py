@@ -47,6 +47,9 @@ if __name__ == "__main__":
     # Read acceleration values
     while True:
         acceleration = adxl345.calibrate()
+        x = acceleration['x']* 0.0078
+        y = acceleration['y']* 0.0078
+        z = acceleration['z']* 0.0078
 
         # Print the acceleration values
         print("Acceleration - X: %.2f g, Y: %.2f g, Z: %.2f g" % (acceleration['x'], acceleration['y'], acceleration['z']))
