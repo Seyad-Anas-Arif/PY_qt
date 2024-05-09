@@ -16,8 +16,8 @@ class Adafruit_ADXL345_Unified:
     def __init__(self, sensorID):
         self._sensorID = sensorID
         self.spi = spidev.SpiDev()
-        self.spi.open(0, 0)  # Use SPI bus 0, device 0
-        self.spi.max_speed_hz = 1000000  # Set SPI speed to 1 MHz
+        self.spi.open(2, 0)  # Use SPI bus 0, device 0
+        self.spi.max_speed_hz = 5000000  # Set SPI speed to 1 MHz
         self.spi.mode = 0b01  # Set SPI mode to 0b01 (CPOL=0, CPHA=1)
         self.setRange(ADXL345_RANGE_2_G)
 
