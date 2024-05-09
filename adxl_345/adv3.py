@@ -1,5 +1,5 @@
 import spidev
-import ctype
+import ctypes
 
 # Define ADXL345 registers
 ADXL345_REG_DEVID      = 0x00
@@ -26,10 +26,10 @@ class Adafruit_ADXL345_Unified:
         if self.spi:
             self.spi.close()
 
-    def writeRegister(self, reg, value):
+    def writeRegister(self, reg, ctypes.c_int16.value):
         self.spi.xfer2([reg, value])
 
-    def readRegister(self, reg):
+    def readRegister(self, ctypes.c_int16.reg):
         return self.spi.xfer2([reg ])
 
     def getDeviceID(self):
