@@ -57,8 +57,8 @@ class Adafruit_ADXL345_Unified:
      print("ADXL345 Device ID:", hex(device_id))
      if device_id != 0xE5:
         return False
-    self.writeRegister(ADXL345_REG_POWER_CTL, 0x08)  # Enable measurements
-    return True
+     self.writeRegister(ADXL345_REG_POWER_CTL, 0x08)  # Enable measurements
+     return True
 
     def getDataRate(self):
         return self.readRegister(ADXL345_REG_BW_RATE)
