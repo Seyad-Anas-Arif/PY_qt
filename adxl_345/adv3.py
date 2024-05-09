@@ -69,6 +69,8 @@ class Adafruit_ADXL345_Unified:
 
 # Example usage
 if __name__ == "__main__":
+    print("Script started")
+
     adxl = Adafruit_ADXL345_Unified(sensorID=123)
     if adxl.begin():
         print("ADXL345 detected!")
