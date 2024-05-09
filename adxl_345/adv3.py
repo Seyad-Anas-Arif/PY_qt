@@ -30,7 +30,7 @@ class Adafruit_ADXL345_Unified:
         self.spi.xfer2([reg, value])
 
     def readRegister(self, reg):
-        return self.spi.xfer2([reg ])
+        return self.spi.xfer2([reg | 0x80 ])
 
     def getDeviceID(self):
         return self.readRegister(ADXL345_REG_DEVID)
@@ -51,7 +51,7 @@ class Adafruit_ADXL345_Unified:
         device_id = device_id[0]
 
      print("ADXL345 Device ID:", hex(device_id))
-     if device_id != 0xf2:
+     if device_id != 0xE5:
         return False
      self.writeRegister(ADXL345_REG_POWER_CTL, 0x08)  # Enable measurements
      return True
