@@ -19,7 +19,7 @@ class Adafruit_ADXL345_Unified:
         self.spi.open(2, 0)  # Use SPI bus 0, device 0
         self.spi.max_speed_hz = 5000000  # Set SPI speed to 1 MHz
         self.spi.mode = 0b01  # Set SPI mode to 0b01 (CPOL=0, CPHA=1)
-        self.setRange(ADXL345_RANGE_2_G)
+       # self.setRange(ADXL345_RANGE_2_G)
 
     def __del__(self):
         if self.spi:
@@ -56,12 +56,12 @@ class Adafruit_ADXL345_Unified:
         self.writeRegister(ADXL345_REG_POWER_CTL, 0x08)  # Enable measurements
         return True
 
-    def setRange(self, range):
+  '''  def setRange(self, range):
         format = self.readRegister(ADXL345_REG_DATA_FORMAT)
         format &= 0b11111100  # Clear range bits
         format |= range
         format |= 0x08  # Set FULL-RES bit for range scaling
-        self.writeRegister(ADXL345_REG_DATA_FORMAT, format)
+        self.writeRegister(ADXL345_REG_DATA_FORMAT, format)'''
 
     def getDataRate(self):
         return self.readRegister(ADXL345_REG_BW_RATE)
