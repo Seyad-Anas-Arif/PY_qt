@@ -32,7 +32,7 @@ def main():
     adxl_init()  # Initialize ADXL345
     c_id = 0x00
     spi.xfer([c_id])
-    chip_id = spi.readbyts(1)
+    chip_id = spi.readbytes(1)
     print("chip id is ",chip_id)
     while True:
         # Read data
