@@ -7,7 +7,7 @@ SPI_SPEED = 500000  # SPI speed in Hz
 
 # SPI setup
 spi = spidev.SpiDev()
-spi.open(0, SPI_CHANNEL)
+spi.open(2, SPI_CHANNEL)
 spi.max_speed_hz = SPI_SPEED
 
 # Functions
