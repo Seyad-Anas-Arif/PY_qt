@@ -49,12 +49,17 @@ class Adafruit_ADXL345_Unified:
         return self.read16(ADXL345_REG_DATAZ0)
 
     def begin(self):
-        device_id = self.getDeviceID()
-        print("ADXL345 Device ID:", hex(device_id))
-        if device_id != 0xE5:
-           return False
-        self.writeRegister(ADXL345_REG_POWER_CTL, 0x08)  # Enable measurements
-        return True
+     device_id = self.getDeviceID()
+     if isinstance(device_id, list):
+        # If getDeviceID() returns a list, take the first element
+        device_id = device_id[0]
+
+      print("ADXL345 Device ID:", hex(device_id))
+     if device_id != 0xE5:
+        return False
+    self.writeRegister(ADXL345_REG_POWER_CTL, 0x08)  # Enable measurements
+    return True
+
     def getDataRate(self):
         return self.readRegister(ADXL345_REG_BW_RATE)
 
