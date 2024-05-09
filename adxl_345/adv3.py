@@ -55,14 +55,6 @@ class Adafruit_ADXL345_Unified:
            return False
         self.writeRegister(ADXL345_REG_POWER_CTL, 0x08)  # Enable measurements
         return True
-
-''''def setRange(self, range):
-        format = self.readRegister(ADXL345_REG_DATA_FORMAT)
-        format &= 0b11111100  # Clear range bits
-        format |= range
-        format |= 0x08  # Set FULL-RES bit for range scaling
-        self.writeRegister(ADXL345_REG_DATA_FORMAT, format)'''
-
     def getDataRate(self):
         return self.readRegister(ADXL345_REG_BW_RATE)
 
