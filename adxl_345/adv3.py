@@ -9,6 +9,7 @@ ADXL345_REG_DATAZ0     = 0x36
 ADXL345_REG_POWER_CTL  = 0x2D
 ADXL345_REG_DATA_FORMAT= 0x31
 ADXL345_REG_BW_RATE    = 0x2C
+Read_mask              = 0x80
 
 # Define ADXL345 constants
 ADXL345_RANGE_2_G      = 0x00
@@ -30,7 +31,7 @@ class Adafruit_ADXL345_Unified:
         self.spi.xfer2([reg, value])
 
     def readRegister(self, reg):
-        value =self.spi.xfer2([reg | 0x80 ])
+        value =self.spi.xfer2([reg | Read_mask ])
         return value[0]
 
     def getDeviceID(self):
