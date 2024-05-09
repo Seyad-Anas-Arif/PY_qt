@@ -46,7 +46,7 @@ if __name__ == "__main__":
 
     # Read acceleration values
     while True:
-        acceleration = adxl345.calibrate()
+        acceleration = adxl345.get_axes()
         x = acceleration['x']* 0.0078
         y = acceleration['y']* 0.0078
         z = acceleration['z']* 0.0078
