@@ -30,7 +30,8 @@ class Adafruit_ADXL345_Unified:
         self.spi.xfer2([reg, value])
 
     def readRegister(self, reg):
-        return self.spi.xfer2([reg | 0x80 ])
+        value =self.spi.xfer2([reg | 0x80 ])
+        return value[0]
 
     def getDeviceID(self):
         return self.readRegister(ADXL345_REG_DEVID)
