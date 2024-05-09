@@ -55,7 +55,7 @@ class Adafruit_ADXL345_Unified:
         device_id = device_id[0]
 
      print("ADXL345 Device ID:", hex(device_id))
-     if device_id != 0xE5:
+     if device_id != 0xf2:
         return False
      self.writeRegister(ADXL345_REG_POWER_CTL, 0x08)  # Enable measurements
      return True
