@@ -1,4 +1,5 @@
 import spidev
+import ctype
 
 # Define ADXL345 registers
 ADXL345_REG_DEVID      = 0x00
@@ -31,22 +32,17 @@ class Adafruit_ADXL345_Unified:
     def readRegister(self, reg):
         return self.spi.xfer2([reg ])
 
-    def read16(self, reg):
-        low_byte = self.readRegister(reg)
-        high_byte = self.readRegister(reg + 1)
-        return (high_byte << 8) | low_byte
-
     def getDeviceID(self):
         return self.readRegister(ADXL345_REG_DEVID)
 
     def getX(self):
-        return self.read16(ADXL345_REG_DATAX0)
+        return self.readRegister(ADXL345_REG_DATAX0)
 
     def getY(self):
-        return self.read16(ADXL345_REG_DATAY0)
+        return self.readRegister(ADXL345_REG_DATAY0)
 
     def getZ(self):
-        return self.read16(ADXL345_REG_DATAZ0)
+        return self.readRegister(ADXL345_REG_DATAZ0)
 
     def begin(self):
      device_id = self.getDeviceID()
