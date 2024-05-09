@@ -52,7 +52,7 @@ if __name__ == "__main__":
         z = acceleration['z']* 0.0078
 
         # Print the acceleration values
-        print("Acceleration - X: %.2f g, Y: %.2f g, Z: %.2f g" % (acceleration['x'], acceleration['y'], acceleration['z']))
+        print("Acceleration - X: %.2f g, Y: %.2f g, Z: %.2f g" % (x, y, z))
 
         time.sleep(1)
 
