@@ -29,7 +29,7 @@ class Adafruit_ADXL345_Unified:
         self.spi.xfer2([reg, value])
 
     def readRegister(self, reg):
-        return self.spi.xfer2([reg | 0x80, 0])[1]
+        return self.spi.xfer2([reg ])
 
     def read16(self, reg):
         low_byte = self.readRegister(reg)
