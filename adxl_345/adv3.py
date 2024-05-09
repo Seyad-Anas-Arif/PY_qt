@@ -26,10 +26,10 @@ class Adafruit_ADXL345_Unified:
         if self.spi:
             self.spi.close()
 
-    def writeRegister(self, reg, ctypes.c_int16.value):
+    def writeRegister(self, reg, value):
         self.spi.xfer2([reg, value])
 
-    def readRegister(self, ctypes.c_int16.reg):
+    def readRegister(self, reg):
         return self.spi.xfer2([reg ])
 
     def getDeviceID(self):
