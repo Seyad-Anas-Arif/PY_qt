@@ -19,7 +19,7 @@ ID_REV =c_uint32(0x0050)
 IRQ_CFG = c_uint32(0x0054)
 INT_STS = c_uint32(0x0058)
 INT_EN = c_uint32(0x005C)
-BYTE_TEST = c_uint32(0x064)
+BYTE_TEST = 0x0064
 HW_CFG = c_uint32(0x0074)
 PMT_CTRL = c_uint32(0x0084)
 GPT_CFG = c_uint32(0x008C)
@@ -203,7 +203,7 @@ def Etc_Read_Reg(address, length):
     Addr = UWORD()    # Initialize Addr as UWORD instance and set address
     xfrbuf = [0] * 7   # Create buffer for SPI transfer
 
-    Addr.LANWord = c_ushort(address)
+    Addr.LANWord = address
 
     xfrbuf[0] = COMM_SPI_READ  # SPI read command
     xfrbuf[1] = Addr.LANByte[1]  # Address high byte
