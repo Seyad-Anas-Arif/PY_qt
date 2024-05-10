@@ -203,7 +203,7 @@ def Etc_Read_Reg(address, length):
     Addr = UWORD()    # Initialize Addr as UWORD instance and set address
     xfrbuf = [0] * 7   # Create buffer for SPI transfer
 
-    Addr.LANWord = c_uint32(address)
+    Addr.LANWord = c_ushort(address)
 
     xfrbuf[0] = COMM_SPI_READ  # SPI read command
     xfrbuf[1] = Addr.LANByte[1]  # Address high byte
