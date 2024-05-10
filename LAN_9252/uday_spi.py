@@ -3,7 +3,7 @@ import spidev
 import time
 import ctypes
 
-from ctypes import Union, LittleEndianStructure, c_uint16, c_uint32, c_uint8
+from ctypes import Union, LittleEndianStructure, c_uint16, c_uint32, c_uint8, c_ushort
 
 # access to EtherCAT registers
 RESET_CTL = 0x01F8
