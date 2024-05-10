@@ -1,4 +1,4 @@
-import spi2.py
+from spi2 import *
 import time
 
 # LAN9252 RESET
