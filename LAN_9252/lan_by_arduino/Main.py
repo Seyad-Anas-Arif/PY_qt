@@ -1,4 +1,4 @@
-from spi2 import *
+import spi2 as LAN925X_SPI
 import time
 
 # LAN9252 RESET
@@ -79,7 +79,7 @@ def LAN9252_EtherCAT_PRAM_WRITE(PRAM_WRITE_LEN, PRAM_WRITE_ADDR, PRAM_WR_DATA):
 # Example usage:
 if __name__ == "__main__":
     # Initialize SPI
-    spi2.LAN925X_SPI_Init()
+    LAN925X_SPI.LAN925X_SPI_Init()
     
     # Reset LAN9252 chip
     LAN9252_RESET()
