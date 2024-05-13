@@ -15,7 +15,7 @@ spi.mode = 0b11
 
 #print(" WRITE Response Data:", rx_data)
 #print()
-while True
+while True:
  # Data to be transmitted
     tx_data = [0x03, 0x00, 0x64, 0xFF, 0xFF, 0xFF, 0xFF]
 
