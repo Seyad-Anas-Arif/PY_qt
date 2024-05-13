@@ -12,28 +12,28 @@ tx_data = [0x02, 0x01, 0xF8, 0x00, 0x00, 0x00, 0x00]
 # Perform SPI transaction
 rx_data = spi.xfer2(tx_data)
 
-print(" WRITE Received Data:", rx_data)
+print(" WRITE Response Data:", rx_data)
 print()
 
 # Data to be transmitted
-tx_data = [0x03, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00]
+tx_data = [0x03, 0x00, 0x64, 0xFF, 0xFF, 0xFF, 0xFF]
 
 # Perform SPI transaction
 rx_data = spi.xfer2(tx_data)
 
 # Display received data
-print(" READ Received Data:", rx_data)
+print(" READ Response Data:", rx_data)
 
 print()
 
 # Data to be transmitted
-tx_data = [0x03, 0x00, 0x50, 0x00, 0x00, 0x00, 0x00]
+tx_data = [0x03, 0x00, 0x50, 0xFF, 0xFF, 0xFF, 0xFF]
 
 # Perform SPI transaction
 rx_data = spi.xfer2(tx_data)
 
 # Display received data
-print("Received Data:", rx_data)
+print("chip id Data:", rx_data)
 
 # Close SPI
 spi.close()
