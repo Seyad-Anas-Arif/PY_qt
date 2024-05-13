@@ -12,7 +12,7 @@ tx_data = [0x03, 0x00, 0x50, 0xFF, 0xFF, 0xFF, 0xFF]
 rx_data = spi.xfer(tx_data)
 
 # Display received data
-print("Received Data:", hex(rx_data))
+print("Received Data:", rx_data)
 
 # Close SPI
 spi.close()
