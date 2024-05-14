@@ -26,10 +26,13 @@ class ADXL345(adxl345.base.ADXL345_Base):
 if __name__ == "__main__":
     # Create an instance of the ADXL345 driver
     adxl345 = ADXL345()
-
+    
 
     # Read acceleration values
     while True:
-        
+        tx_data = [0x03, 0x00, 0x64, 0xFF, 0xFF, 0xFF, 0xFF]
+        # Perform SPI transaction
+        rx_data = spi.xfer2(tx_data)
+        # Display received data
+        print(" READ Response Data:", rx_data)
         time.sleep(1)
-
