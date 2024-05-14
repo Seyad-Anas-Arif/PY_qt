@@ -27,12 +27,12 @@ while True:
     print()
 
 # Data to be transmitted
-   tx_data = [0x03, 0x00, 0x50, 0xFF, 0xFF, 0xFF, 0xFF]
+    tx_data = [0x03, 0x00, 0x50, 0xFF, 0xFF, 0xFF, 0xFF]
 # Perform SPI transaction
-   rx_data = spi.xfer2(tx_data)
+    rx_data = spi.xfer2(tx_data)
 # Display received data
-   print("chip id Data:", rx_data)
-   time.sleep(0.2)
+    print("chip id Data:", rx_data)
+    time.sleep(0.2)
 
 # Close SPI
 spi.close()
