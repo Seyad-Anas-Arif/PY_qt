@@ -1,4 +1,4 @@
-import spidev
+from periphery import SPI
 import time
 
 spi = SPI("/dev/spidev2.0", mode=3, max_speed=5000000)  # SPI bus 2, mode 3, 5 MHz
