@@ -1,4 +1,5 @@
 import spidev
+import struct
 import time
 
 # Constants for SPI configuration
