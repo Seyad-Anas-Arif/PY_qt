@@ -17,19 +17,22 @@ try:
     while True:
         # Write operation
         tx_data_write = 565114616938496
-        rx_data_write = spi.xfer2([tx_data_write])
+        data_out = struct.pack('B', tx_data_write)
+        rx_data_write = spi.xfer2([data_out])
         print("WRITE Response Data:", rx_data_write)
         time.sleep(0.2)
 
         # Read operation
         tx_data_read = 844858721828863
-        rx_data_read = spi.xfer2([tx_data_read])
+        data_out = struct.pack('B', tx_data_read)
+        rx_data_read = spi.xfer2([data_out])
         print("READ Response Data:", rx_data_read)
         time.sleep(0.2)
 
         # Chip ID read
         tx_data_chip_id = 844858721828863
-        rx_data_chip_id = spi.xfer2([tx_data_chip_id])
+        data_out = struct.pack('B', tx_data_chip_id)
+        rx_data_chip_id = spi.xfer2([data_out])
         print("Chip ID Data:", rx_data_chip_id)
         time.sleep(0.2)
 
