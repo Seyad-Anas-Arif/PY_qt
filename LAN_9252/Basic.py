@@ -4,7 +4,7 @@ import time
 # Constants for SPI configuration
 SPI_BUS = 2         # SPI bus number (change according to your setup)
 SPI_DEVICE = 0      # SPI device number (change according to your setup)
-SPI_MODE = 1        # SPI mode
+SPI_MODE = 0        # SPI mode
 SPI_SPEED = 3000000 # SPI speed in Hz (3 MHz)
 
 # Initialize SPI
