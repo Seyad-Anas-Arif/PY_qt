@@ -1,4 +1,5 @@
 import spidev
+from lanh import *
 
 def LAN925X_SPI_Init():
     spi = spidev.SpiDev()
