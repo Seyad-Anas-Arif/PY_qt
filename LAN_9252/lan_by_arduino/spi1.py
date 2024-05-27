@@ -20,9 +20,9 @@ def SQI_RESET():
 
 def LAN925X_SPI_READ(addr):
     rdata = 0
-    SPI_8bit_Write(spi, 0x03)  # Instruction
-    SPI_8bit_Write(spi, addr >> 8)  # Address high byte
-    SPI_8bit_Write(spi, addr & 0xFF)  # Address low byte
+    SPI_8bit_Write( 0x03)  # Instruction
+    SPI_8bit_Write( addr >> 8)  # Address high byte
+    SPI_8bit_Write( addr & 0xFF)  # Address low byte
     for _ in range(4):
         rdata <<= 8
         rdata |= SPI_8bit_Read()
