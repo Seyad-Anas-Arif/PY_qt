@@ -1,4 +1,5 @@
-import spi1 as LAN925X_SPI
+import spi1 
+import lanh as LAN925X_SPI
 import time
 
 # LAN9252 RESET
