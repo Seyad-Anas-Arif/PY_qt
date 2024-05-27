@@ -12,6 +12,7 @@ def LAN9252_RESET():
     while rdata != 0x87654321:
         addr = LAN925X_SPI.BYTE_TEST
         rdata = LAN925X_SPI.LAN925X_SPI_READ(addr)
+        print("byte test:",addr,"rdata is:",rdata)
     print("exited from reset")     
 
 # LAN9252 EtherCAT CSR WRITE
