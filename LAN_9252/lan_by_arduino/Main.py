@@ -80,7 +80,7 @@ def LAN9252_EtherCAT_PRAM_WRITE(PRAM_WRITE_LEN, PRAM_WRITE_ADDR, PRAM_WR_DATA):
 if __name__ == "__main__":
     # Initialize SPI
     LAN925X_SPI.LAN925X_SPI_Init()
-    
+    try: 
     # Reset LAN9252 chip
     LAN9252_RESET()
 
@@ -97,4 +97,10 @@ if __name__ == "__main__":
     
     # Write to EtherCAT Process RAM
     LAN9252_EtherCAT_PRAM_WRITE(16, 0x1000, 0x12345678)
+    except KeyboardInterrupt:
+        # Graceful exit on Ctrl+C
+        print("Exiting...")
 
+    finally:
+        # Close SPI
+      LAN925X_SPI.LAN9252_CLOSE()
