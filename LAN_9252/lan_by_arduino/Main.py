@@ -8,9 +8,11 @@ def LAN9252_RESET():
     
     addr = LAN925X_SPI.BYTE_TEST
     rdata = LAN925X_SPI.LAN925X_SPI_READ(addr)
+    print("inside reset")
     while rdata != 0x87654321:
         addr = LAN925X_SPI.BYTE_TEST
         rdata = LAN925X_SPI.LAN925X_SPI_READ(addr)
+    print("exited from reset")     
 
 # LAN9252 EtherCAT CSR WRITE
 def LAN9252_EtherCAT_CSR_WRITE(CSR_SIZE, CSR_ADDR, CSR_DATA):
@@ -79,6 +81,7 @@ def LAN9252_EtherCAT_PRAM_WRITE(PRAM_WRITE_LEN, PRAM_WRITE_ADDR, PRAM_WR_DATA):
 # Example usage:
 if __name__ == "__main__":
     # Initialize SPI
+    print("program Started")
     LAN925X_SPI.LAN925X_SPI_Init()
     try: 
         # Reset LAN9252 chip
